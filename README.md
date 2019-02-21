@@ -4,6 +4,6 @@
 
 ## User Stories
 
-1. I am a user that likes funny stories and I would like this game to tell stories that are funny for “bite sized” experience. I don’t take the story serious. I would 
+1. I am a user that enjoys a thrilling story. I would like the app to tell an engaging story that I can be immersed in.
 
-2. I am a user that likes to explore different paths in a game and see what the different ending are.
+2. I am a user that likes to explore different paths in a game and see what the different ending are. I would enjoy the option to go back to previous junctions and choose other decisions so that I may see what the different paths lead to.
