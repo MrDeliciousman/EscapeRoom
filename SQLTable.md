@@ -1,0 +1,1 @@
+For my individual project, I feel that I will need to use a column for the current weather, and time for the day. I can use that information as parameters that would affect changes in the story. It would provide some variety in the story that would add some depth to the project.
