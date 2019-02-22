@@ -90,4 +90,6 @@
     "when a user tries to pick up one of cards.\n\n"
   </string>
   <string name="action_settings">Settings</string>
+  <string name="option1_button">Option1</string>
+  <string name="option2_button">Option2</string>
 </resources>
