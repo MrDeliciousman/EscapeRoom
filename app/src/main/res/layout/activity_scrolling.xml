@@ -47,15 +47,25 @@
     android:id="@+id/option1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
     android:gravity="center"
-    android:text="@string/option1_button"/>
+    android:text="@string/option1_button"
+    android:background="#808c8c8c"
+    android:textColor="#FFFFFF"/>
 
   <Button
     android:id="@+id/option2"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
     android:gravity="center"
-    android:text="@string/option2_button"/>
+    android:text="@string/option2_button"
+    android:background="#808c8c8c"
+    android:textColor="#FFFFFF"/>
 </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
