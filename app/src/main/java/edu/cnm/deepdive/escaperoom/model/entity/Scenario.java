@@ -1,19 +1,25 @@
 package edu.cnm.deepdive.escaperoom.model.entity;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
-@Entity(
-
-)
-
+@Entity
 public class Scenario {
 
-  private int scenario_id;
+  @PrimaryKey
+  private int id;
 
-  private String scenario_title;
+  @NonNull
+  @ColumnInfo
+  private String title;
 
-  private String media_picture;
+  @ColumnInfo(name = "media_picture")
+  private String mediaPicture;
 
-  private String accessible_text;
+  @ColumnInfo(name = "accessible_text")
+  private String accessibleText;
 
 }
