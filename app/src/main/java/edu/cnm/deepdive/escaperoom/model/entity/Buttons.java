@@ -16,12 +16,43 @@ import android.arch.persistence.room.PrimaryKey;
 public class Buttons {
 
   @PrimaryKey
-  private int id;
+  private long id;
   @ColumnInfo(name = "from_scenario_id")
-  private int fromScenarioId;
+  private long fromScenarioId;
   @ColumnInfo(name = "to_scenario_id")
-  private int toScenarioId;
+  private long toScenarioId;
   @ColumnInfo(name = "buttons_title")
   private String buttonsTitle;
 
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public long getFromScenarioId() {
+    return fromScenarioId;
+  }
+
+  public void setFromScenarioId(long fromScenarioId) {
+    this.fromScenarioId = fromScenarioId;
+  }
+
+  public long getToScenarioId() {
+    return toScenarioId;
+  }
+
+  public void setToScenarioId(long toScenarioId) {
+    this.toScenarioId = toScenarioId;
+  }
+
+  public String getButtonsTitle() {
+    return buttonsTitle;
+  }
+
+  public void setButtonsTitle(String buttonsTitle) {
+    this.buttonsTitle = buttonsTitle;
+  }
 }

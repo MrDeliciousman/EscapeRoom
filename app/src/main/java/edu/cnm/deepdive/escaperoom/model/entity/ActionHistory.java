@@ -18,11 +18,53 @@ public class ActionHistory {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "action_history")
-  private int actionHistory;
+  private long actionHistory;
   @ColumnInfo(name = "user_id")
-  private int userId;
+  private long userId;
   @ColumnInfo(name = "scenario_id")
-  private int scenarioId;
+  private long scenarioId;
   @ColumnInfo(name = "buttons_id")
-  private int buttonsId;
+  private long buttonsId;
+  @ColumnInfo(name = "buttons_title")
+  private String buttonsTitle;
+
+  public long getActionHistory() {
+    return actionHistory;
+  }
+
+  public void setActionHistory(long actionHistory) {
+    this.actionHistory = actionHistory;
+  }
+
+  public long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(long userId) {
+    this.userId = userId;
+  }
+
+  public long getScenarioId() {
+    return scenarioId;
+  }
+
+  public void setScenarioId(long scenarioId) {
+    this.scenarioId = scenarioId;
+  }
+
+  public long getButtonsId() {
+    return buttonsId;
+  }
+
+  public void setButtonsId(long buttonsId) {
+    this.buttonsId = buttonsId;
+  }
+
+  public String getButtonsTitle() {
+    return buttonsTitle;
+  }
+
+  public void setButtonsTitle(String buttonsTitle) {
+    this.buttonsTitle = buttonsTitle;
+  }
 }
