@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 @Entity
 public class Scenario {
 
-  @PrimaryKey
+  @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "scenario_id")
   private long scenarioID;
 

@@ -15,7 +15,7 @@ import android.arch.persistence.room.PrimaryKey;
 )
 public class Buttons {
 
-  @PrimaryKey
+  @PrimaryKey(autoGenerate = true)
   private long buttonsId;
   @ColumnInfo(name = "from_scenario_id")
   private long fromScenarioId;
