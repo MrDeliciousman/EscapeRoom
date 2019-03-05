@@ -6,7 +6,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(indices = {@Index("user_id"), @Index("name")})
+@Entity(indices = {
+    @Index("user_id"), @Index("name")})
 public class User {
 
   @PrimaryKey(autoGenerate = true)

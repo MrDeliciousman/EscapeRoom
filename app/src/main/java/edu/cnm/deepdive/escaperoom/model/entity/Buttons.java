@@ -12,7 +12,8 @@ import android.arch.persistence.room.PrimaryKey;
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "from_scenario_id"),
         @ForeignKey(
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "to_scenario_id")
-    }, indices = {@Index("buttons_id"), @Index("from_scenario_id"), @Index("to_scenario_id"), @Index("buttons_title")}
+    }, indices = {
+        @Index("buttons_id"), @Index("from_scenario_id"), @Index("to_scenario_id"), @Index("buttons_title")}
 )
 public class Buttons {
 
