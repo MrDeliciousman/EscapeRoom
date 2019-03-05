@@ -7,7 +7,7 @@ import edu.cnm.deepdive.escaperoom.model.entity.Scenario;
 @Dao
 public interface ScenarioDao {
 
-  @Query("SELECT * FROM Scenario WHERE id = :id")
-  Scenario getScenario();
+  @Query("SELECT * FROM Scenario WHERE scenario_id = :scenarioId")
+  Scenario getScenario(long scenarioId);
 
 }

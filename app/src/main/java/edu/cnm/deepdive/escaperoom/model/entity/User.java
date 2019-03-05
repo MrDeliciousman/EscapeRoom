@@ -8,17 +8,18 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class User {
 
-  @PrimaryKey
-  private long id;
+  @PrimaryKey(autoGenerate = true)
+  @ColumnInfo(name = "user_id")
+  private long userID;
   @ColumnInfo
   private String name;
 
-  public long getId() {
-    return id;
+  public long getUserID() {
+    return userID;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUserID(long userID) {
+    this.userID = userID;
   }
 
   public String getName() {

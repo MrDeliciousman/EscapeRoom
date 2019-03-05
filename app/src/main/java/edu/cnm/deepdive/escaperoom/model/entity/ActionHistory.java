@@ -7,11 +7,11 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(
     foreignKeys = {@ForeignKey
-        (entity = User.class, parentColumns = "id", childColumns = "user_id"),
+        (entity = User.class, parentColumns = "user_id", childColumns = "user_id"),
         @ForeignKey
-        (entity = Scenario.class, parentColumns = "id", childColumns = "scenario_id"),
+        (entity = Scenario.class, parentColumns = "scenario_id", childColumns = "scenario_id"),
         @ForeignKey
-        (entity = Buttons.class, parentColumns = "id", childColumns = "buttons_id")
+        (entity = Buttons.class, parentColumns = "buttons_id", childColumns = "buttons_id")
     }
 )
 public class ActionHistory {

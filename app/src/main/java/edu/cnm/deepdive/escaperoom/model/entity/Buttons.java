@@ -8,15 +8,15 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(
     foreignKeys = {
         @ForeignKey(
-        entity = Scenario.class, parentColumns = "id", childColumns = "from_scenario_id"),
+        entity = Scenario.class, parentColumns = "scenario_id", childColumns = "from_scenario_id"),
         @ForeignKey(
-        entity = Scenario.class, parentColumns = "id", childColumns = "to_scenario_id")
+        entity = Scenario.class, parentColumns = "scenario_id", childColumns = "to_scenario_id")
     }
 )
 public class Buttons {
 
   @PrimaryKey
-  private long id;
+  private long buttonsId;
   @ColumnInfo(name = "from_scenario_id")
   private long fromScenarioId;
   @ColumnInfo(name = "to_scenario_id")
@@ -24,12 +24,12 @@ public class Buttons {
   @ColumnInfo(name = "buttons_title")
   private String buttonsTitle;
 
-  public long getId() {
-    return id;
+  public long getButtonsId() {
+    return buttonsId;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setButtonsId(long buttonsId) {
+    this.buttonsId = buttonsId;
   }
 
   public long getFromScenarioId() {
