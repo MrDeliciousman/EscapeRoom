@@ -3,9 +3,10 @@ package edu.cnm.deepdive.escaperoom.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(indices = {@Index("user_id"), @Index("name")})
 public class User {
 
   @PrimaryKey(autoGenerate = true)

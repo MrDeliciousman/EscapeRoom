@@ -3,14 +3,14 @@
   xmlns:tools="http://schemas.android.com/tools"
   tools:context="edu.cnm.deepdive.escaperoom.ScrollingActivity">
   <item
-    android:scenarioID="@+scenarioID/action_settings"
+    android:id="@+id/action_settings"
     android:orderInCategory="90"
     android:title="@string/new_game_option"
     app:showAsAction="never"/>
     <corners/>
 
    <item
-     android:scenarioID="@+scenarioID/history"
+     android:id="@+id/history"
      android:orderInCategory="100"
      android:title="@string/history_setting"
      app:showAsAction="never"/>

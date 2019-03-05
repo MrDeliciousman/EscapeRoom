@@ -3,6 +3,7 @@ package edu.cnm.deepdive.escaperoom.model.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(
@@ -11,11 +12,12 @@ import android.arch.persistence.room.PrimaryKey;
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "from_scenario_id"),
         @ForeignKey(
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "to_scenario_id")
-    }
+    }, indices = {@Index("buttons_id"), @Index("from_scenario_id"), @Index("to_scenario_id"), @Index("buttons_title")}
 )
 public class Buttons {
 
   @PrimaryKey(autoGenerate = true)
+  @ColumnInfo(name = "buttons_id")
   private long buttonsId;
   @ColumnInfo(name = "from_scenario_id")
   private long fromScenarioId;

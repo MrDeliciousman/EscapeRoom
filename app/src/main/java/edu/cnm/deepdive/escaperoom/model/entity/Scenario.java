@@ -2,10 +2,11 @@ package edu.cnm.deepdive.escaperoom.model.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity
+@Entity(indices = {@Index("scenario_id"), @Index("title"), @Index("media_picture"),@Index("accessible_text")})
 public class Scenario {
 
   @PrimaryKey(autoGenerate = true)
