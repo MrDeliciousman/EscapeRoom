@@ -13,5 +13,5 @@ public interface ActionHistoryDao {
   ActionHistory getActionHistory();
 
   @Insert
-  public long insert(ActionHistory actionHistory);
+  long insert(ActionHistory actionHistory);
 }

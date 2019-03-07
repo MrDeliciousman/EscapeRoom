@@ -11,5 +11,5 @@ public interface UserDao {
   User getUser(long userId);
 
   @Update
-  public void updateUser(User user);
+  void updateUser(User user);
 }
