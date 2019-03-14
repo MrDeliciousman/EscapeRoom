@@ -3,6 +3,7 @@ package edu.cnm.deepdive.escaperoom;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -37,7 +38,12 @@ public class ScrollingActivity extends AppCompatActivity {
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_settings) {
       return true;
+    } else if (id == R.id.history) {
+      HistoryFragment hf = new HistoryFragment();
+      hf.show(getSupportFragmentManager(), hf.getClass().getSimpleName());
+      return true;
     }
+
     return super.onOptionsItemSelected(item);
   }
 }

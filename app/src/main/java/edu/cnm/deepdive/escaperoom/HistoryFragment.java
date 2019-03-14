@@ -3,38 +3,48 @@ package edu.cnm.deepdive.escaperoom;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import edu.cnm.deepdive.escaperoom.model.entity.ActionHistory;
+import java.util.ArrayList;
 
 
-public class HistoryFragment extends Fragment {
-  ActionHistory actionHistory = new ActionHistory();
-  TextView history = new TextView();
-  public static HistoryFragment newInstance() {
-    HistoryFragment fragment = new HistoryFragment();
-    return fragment;
+public class HistoryFragment extends DialogFragment {
+
+  private ListView historyList;
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    //TODO get the id of the user
   }
 
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_history, null);
-    TextView explanation = view.findViewById(R.id.history);
-    history.setText(actionHistory.getActionHistory());
-
+    historyList = view.findViewById(R.id.history_list);
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+        android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dummy_history));
+    historyList.setAdapter(adapter);
+    //TODO populate list from database
     return new AlertDialog.Builder(getActivity())
-        .setIcon(R.drawable.ic_info_filled)
-        .setTitle("History")
+        .setTitle("Scenario History")
         .setView(view)
-        .setPositiveButton(R.string.ok_button, (dialog, which) -> {})
+        .setPositiveButton("OK", (dialog, which) -> {})
         .create();
   }
 
