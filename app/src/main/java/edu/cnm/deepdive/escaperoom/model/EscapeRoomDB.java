@@ -62,13 +62,17 @@ public abstract class EscapeRoomDB extends RoomDatabase {
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
-      //TODO create PreloadTask class for use here.
+      new PreloadTask().execute();
     }
 
     @Override
     public void onOpen(@NonNull SupportSQLiteDatabase db) {
       super.onOpen(db);
-      //TODO Get AFluentAsyncTask to work.
+      EscapeRoomDB database =  EscapeRoomDB.getInstance();
+      new BaseFluentAsyncTask<Void, Void, List<Scenario>, List<Scenario>>()
+        .setPerformer((ignore) -> database.getScenarioDao().findAll())
+          .setSuccessListener()
+          .execute();
     }
   }
 
@@ -89,9 +93,9 @@ public abstract class EscapeRoomDB extends RoomDatabase {
           for (CSVRecord record : parser) {
             Scenario scenario = new Scenario();
             scenario.setTitle(record.get(0));
-            String resourcename = record.get(1);
+            String resourceName = record.get(1);
             long sourceId = database.getScenarioDao().insert(scenario);
-            scenarios.addAll(loadScenarios(sourceId, resourcename));
+            scenarios.addAll(loadScenarios(sourceId, resourceName));
           }
           database.getScenarioDao().insert(scenarios);
       } catch (IOException e) {
@@ -115,7 +119,7 @@ public abstract class EscapeRoomDB extends RoomDatabase {
               Scenario scenario = new Scenario();
               scenario.setScenarioID(scenarioId);
               scenario.setTitle(line);
-              scenario.add(scenario);
+              scenarios.add(scenario);
             }
           }
           return scenarios;
