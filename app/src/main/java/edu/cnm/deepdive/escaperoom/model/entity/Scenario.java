@@ -7,10 +7,10 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(indices = {
-    @Index("scenario_id"), @Index("title"), @Index("media_picture"),@Index("accessible_text")})
+    @Index("scenario_id"), @Index("title"), @Index("resource_name")})
 public class Scenario {
 
-  @PrimaryKey(autoGenerate = true)
+  @PrimaryKey
   @ColumnInfo(name = "scenario_id")
   private long scenarioID;
 
@@ -18,11 +18,9 @@ public class Scenario {
   @ColumnInfo
   private String title;
 
-  @ColumnInfo(name = "media_picture")
-  private String mediaPicture;
+  @ColumnInfo(name = "resource_name")
+  private String resourceName;
 
-  @ColumnInfo(name = "accessible_text")
-  private String accessibleText;
 
   public long getScenarioID() {
     return scenarioID;
@@ -41,19 +39,13 @@ public class Scenario {
     this.title = title;
   }
 
-  public String getMediaPicture() {
-    return mediaPicture;
+  public String getResourceName() {
+    return resourceName;
   }
 
-  public void setMediaPicture(String mediaPicture) {
-    this.mediaPicture = mediaPicture;
+  public void setResourceName(String resourceName) {
+    this.resourceName = resourceName;
   }
 
-  public String getAccessibleText() {
-    return accessibleText;
-  }
 
-  public void setAccessibleText(String accessibleText) {
-    this.accessibleText = accessibleText;
-  }
 }

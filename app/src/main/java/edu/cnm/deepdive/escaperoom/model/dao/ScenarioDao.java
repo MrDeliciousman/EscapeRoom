@@ -19,7 +19,7 @@ public interface ScenarioDao {
   @Insert
   List<Long> insert(List<Scenario> scenarios);
 
-  @Query("SELECT * FROM Scenario ORDER BY title ASC")
+  @Query("SELECT * FROM Scenario ORDER BY scenario_id ASC")
   List<Scenario> findAll();
 
   @Query("SELECT * FROM Scenario WHERE scenario_id = :scenarioId")
