@@ -1,0 +1,40 @@
+0001, Red Door, 0003
+0001, Blue Door, 0002
+0003, Fight Back!, 0004
+0003, Flee!, 0007
+0004, Die?, 0020
+0004, Continue, 0020
+0002, Kick, 0005
+0002, Flee, 0007
+0005, Fight Back!, 0020
+0005, Flee!, 0006
+0006, Continue, 0003
+0006, Trip, 0020
+0007, Continue,
+0007, Continue,
+0008, Fight Back!, 0010
+0008, Flee!, 0009
+0010, Fight!, 0011
+0010, Flee!, 0009
+0011, Fight!, 0020
+0011, Flee!, 0020
+0009, Restart, 0001
+0009, Restart, 0001
+0012, Fight!, 0014
+0012, Flee!, 0013
+0013, Fight!, 0020
+0013, Die!, 0020
+0014, Follow, 0015
+0014, Walk Away, 0017
+0015, Enter, 0016
+0015, Walk Away, 0017
+0016, Stay, 0020
+0016, Go Back, 0017
+0017, Succumb, 0019
+0017, Stay Awake, 0018
+0018, Fight!, 0020
+0018, Die, 0020
+0019, Restart, 0001
+0019, Restart, 0001
+0020, Restart, 0001
+0020, Restart, 0001
