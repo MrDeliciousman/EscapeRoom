@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "31ee76716aea1d868bf8658ac93c7933",
+    "identityHash": "faf12c15d13b80a4997d4adae2a097cf",
     "entities": [
       {
         "tableName": "ActionHistory",
@@ -176,20 +176,20 @@
             "createSql": "CREATE  INDEX `index_Buttons_from_scenario_id` ON `${TABLE_NAME}` (`from_scenario_id`)"
           },
           {
-            "name": "index_Buttons_to_scenario_id",
-            "unique": false,
-            "columnNames": [
-              "to_scenario_id"
-            ],
-            "createSql": "CREATE  INDEX `index_Buttons_to_scenario_id` ON `${TABLE_NAME}` (`to_scenario_id`)"
-          },
-          {
             "name": "index_Buttons_buttons_title",
             "unique": false,
             "columnNames": [
               "buttons_title"
             ],
             "createSql": "CREATE  INDEX `index_Buttons_buttons_title` ON `${TABLE_NAME}` (`buttons_title`)"
+          },
+          {
+            "name": "index_Buttons_to_scenario_id",
+            "unique": false,
+            "columnNames": [
+              "to_scenario_id"
+            ],
+            "createSql": "CREATE  INDEX `index_Buttons_to_scenario_id` ON `${TABLE_NAME}` (`to_scenario_id`)"
           }
         ],
         "foreignKeys": [
@@ -219,7 +219,7 @@
       },
       {
         "tableName": "Scenario",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scenario_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `media_picture` TEXT, `accessible_text` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`scenario_id` INTEGER NOT NULL, `title` TEXT NOT NULL, `resource_name` TEXT, PRIMARY KEY(`scenario_id`))",
         "fields": [
           {
             "fieldPath": "scenarioID",
@@ -234,14 +234,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "mediaPicture",
-            "columnName": "media_picture",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "accessibleText",
-            "columnName": "accessible_text",
+            "fieldPath": "resourceName",
+            "columnName": "resource_name",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -250,7 +244,7 @@
           "columnNames": [
             "scenario_id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [
           {
@@ -270,20 +264,12 @@
             "createSql": "CREATE  INDEX `index_Scenario_title` ON `${TABLE_NAME}` (`title`)"
           },
           {
-            "name": "index_Scenario_media_picture",
+            "name": "index_Scenario_resource_name",
             "unique": false,
             "columnNames": [
-              "media_picture"
+              "resource_name"
             ],
-            "createSql": "CREATE  INDEX `index_Scenario_media_picture` ON `${TABLE_NAME}` (`media_picture`)"
-          },
-          {
-            "name": "index_Scenario_accessible_text",
-            "unique": false,
-            "columnNames": [
-              "accessible_text"
-            ],
-            "createSql": "CREATE  INDEX `index_Scenario_accessible_text` ON `${TABLE_NAME}` (`accessible_text`)"
+            "createSql": "CREATE  INDEX `index_Scenario_resource_name` ON `${TABLE_NAME}` (`resource_name`)"
           }
         ],
         "foreignKeys": []
@@ -334,7 +320,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"31ee76716aea1d868bf8658ac93c7933\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"faf12c15d13b80a4997d4adae2a097cf\")"
     ]
   }
 }

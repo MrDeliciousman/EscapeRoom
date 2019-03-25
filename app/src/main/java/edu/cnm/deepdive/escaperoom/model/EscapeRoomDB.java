@@ -8,6 +8,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import edu.cnm.deepdive.android.BaseFluentAsyncTask;
+import edu.cnm.deepdive.android.BaseFluentAsyncTask.ResultListener;
 import edu.cnm.deepdive.escaperoom.EscapeRoomApplication;
 import edu.cnm.deepdive.escaperoom.R;
 import edu.cnm.deepdive.escaperoom.model.dao.ActionHistoryDao;
@@ -71,7 +72,12 @@ public abstract class EscapeRoomDB extends RoomDatabase {
       EscapeRoomDB database =  EscapeRoomDB.getInstance();
       new BaseFluentAsyncTask<Void, Void, List<Scenario>, List<Scenario>>()
         .setPerformer((ignore) -> database.getScenarioDao().findAll())
-          .setSuccessListener()
+          .setSuccessListener(new ResultListener<List<Scenario>>() {
+            @Override
+            public void handle(List<Scenario> scenarios) {
+
+            }
+          })
           .execute();
     }
   }
@@ -81,19 +87,20 @@ public abstract class EscapeRoomDB extends RoomDatabase {
 
     @Nullable
     @Override
-    protected void perform(Void... voids) throws TaskException {
+    protected Void perform(Void... voids) throws TaskException {
       Context context = EscapeRoomApplication.getInstance().getApplicationContext();
       EscapeRoomDB database = EscapeRoomDB.getInstance();
       try (
-          InputStream input = context.getResources().openRawResource(R.raw.scenarios);
+          InputStream input = context.getResources().openRawResource(R.raw.scenario);
           Reader reader = new InputStreamReader(input);
           CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT);
           ) {
         List<Scenario> scenarios = new LinkedList<>();
           for (CSVRecord record : parser) {
             Scenario scenario = new Scenario();
-            scenario.setTitle(record.get(0));
-            String resourceName = record.get(1);
+            scenario.setScenarioID(Long.valueOf(record.get(0)));
+            scenario.setTitle(record.get(1));
+            String resourceName = record.get(2);
             long sourceId = database.getScenarioDao().insert(scenario);
             scenarios.addAll(loadScenarios(sourceId, resourceName));
           }
@@ -101,6 +108,8 @@ public abstract class EscapeRoomDB extends RoomDatabase {
       } catch (IOException e) {
         throw new TaskException(e);
       }
+
+      return null;
     }
 
     private List<Scenario> loadScenarios(long scenarioId, String resourceName) {

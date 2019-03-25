@@ -9,8 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import edu.cnm.deepdive.escaperoom.model.EscapeRoomDB;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class ScrollingActivity extends AppCompatActivity implements OnClickListener {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,18 @@ public class ScrollingActivity extends AppCompatActivity {
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
+  }
+
+  private void loadScenario() {
+    Button button1 = findViewById(R.id.option1);
+
+    long scenarioId = 1;
+    // Get scenario from DB.
+
+    long toScenarioFirst = 2;
+    long toScenarioSecond = 3;
+    button1.setTag(toScenarioFirst);
+    button1.setOnClickListener(this);
   }
 
   @Override
@@ -45,5 +60,15 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  @Override
+  public void onClick(View v) {
+    Long toId = (Long) v.getTag();
+    switch (v.getId()) {
+      case R.id.option1:
+        // Go to scenario for toId;
+        break;
+    }
   }
 }
