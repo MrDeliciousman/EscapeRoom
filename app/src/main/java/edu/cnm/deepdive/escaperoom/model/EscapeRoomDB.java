@@ -12,14 +12,13 @@ import edu.cnm.deepdive.android.BaseFluentAsyncTask.ResultListener;
 import edu.cnm.deepdive.escaperoom.EscapeRoomApplication;
 import edu.cnm.deepdive.escaperoom.R;
 import edu.cnm.deepdive.escaperoom.model.dao.ActionHistoryDao;
-import edu.cnm.deepdive.escaperoom.model.dao.ButtonsDao;
+import edu.cnm.deepdive.escaperoom.model.dao.ButtonDao;
 import edu.cnm.deepdive.escaperoom.model.dao.ScenarioDao;
 import edu.cnm.deepdive.escaperoom.model.dao.UserDao;
 import edu.cnm.deepdive.escaperoom.model.entity.ActionHistory;
-import edu.cnm.deepdive.escaperoom.model.entity.Buttons;
+import edu.cnm.deepdive.escaperoom.model.entity.Button;
 import edu.cnm.deepdive.escaperoom.model.entity.Scenario;
 import edu.cnm.deepdive.escaperoom.model.entity.User;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,7 +31,7 @@ import org.apache.commons.csv.CSVRecord;
 
 
 @Database(
-    entities = {ActionHistory.class, Buttons.class, Scenario.class, User.class},
+    entities = {ActionHistory.class, Button.class, Scenario.class, User.class},
     version = 1,
     exportSchema = true
 )
@@ -44,7 +43,7 @@ public abstract class EscapeRoomDB extends RoomDatabase {
 
   public abstract ActionHistoryDao getActionHistoryDao();
 
-  public abstract ButtonsDao getButtonsDao();
+  public abstract ButtonDao getButtonsDao();
 
   public abstract ScenarioDao getScenarioDao();
 
@@ -63,7 +62,7 @@ public abstract class EscapeRoomDB extends RoomDatabase {
     @Override
     public void onCreate(@NonNull SupportSQLiteDatabase db) {
       super.onCreate(db);
-      new PreloadTask().execute();
+      new PreloadTask().start();
     }
 
     @Override
@@ -83,57 +82,58 @@ public abstract class EscapeRoomDB extends RoomDatabase {
   }
 
   private static class PreloadTask
-  extends BaseFluentAsyncTask<Void, Void, Void, Void> {
+  extends Thread {
 
     @Nullable
     @Override
-    protected Void perform(Void... voids) throws TaskException {
+    public void run() {
       Context context = EscapeRoomApplication.getInstance().getApplicationContext();
       EscapeRoomDB database = EscapeRoomDB.getInstance();
-      try (
+      loadScenarios(context, database);
+      loadButtons(context, database);
+    }
+
+    private void loadScenarios(Context context, EscapeRoomDB database) {
+       try (
           InputStream input = context.getResources().openRawResource(R.raw.scenario);
           Reader reader = new InputStreamReader(input);
           CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT);
-          ) {
-        List<Scenario> scenarios = new LinkedList<>();
-          for (CSVRecord record : parser) {
-            Scenario scenario = new Scenario();
-            scenario.setScenarioID(Long.valueOf(record.get(0)));
-            scenario.setTitle(record.get(1));
-            String resourceName = record.get(2);
-            long sourceId = database.getScenarioDao().insert(scenario);
-            scenarios.addAll(loadScenarios(sourceId, resourceName));
-          }
-          database.getScenarioDao().insert(scenarios);
+       ) {
+          List<Scenario> scenarios = new LinkedList<>();
+         for (CSVRecord record : parser) {
+           Scenario scenario = new Scenario();
+           scenario.setScenarioID(Long.parseLong(record.get(0)));
+           scenario.setTitle(record.get(1));
+           scenario.setResourceName(record.get(2));
+           scenarios.add(scenario);
+         }
+         database.getScenarioDao().insert(scenarios);
       } catch (IOException e) {
-        throw new TaskException(e);
+        throw new RuntimeException(e);
       }
-
-      return null;
     }
 
-    private List<Scenario> loadScenarios(long scenarioId, String resourceName) {
-      Context context = EscapeRoomApplication.getInstance().getApplicationContext();
-      int resourceId =
-          context.getResources().getIdentifier(resourceName, "raw", context.getPackageName());
+    private void loadButtons(Context context, EscapeRoomDB database) {
       try (
-          InputStream input = context.getResources().openRawResource(resourceId);
+          InputStream input = context.getResources().openRawResource(R.raw.buttons);
           Reader reader = new InputStreamReader(input);
-          BufferedReader buffer = new BufferedReader(reader);
-          ) {
-          List<Scenario> scenarios = new LinkedList<>();
-          String line;
-          while ((line = buffer.readLine()) != null) {
-            if (!(line = line.trim()).isEmpty()) {
-              Scenario scenario = new Scenario();
-              scenario.setScenarioID(scenarioId);
-              scenario.setTitle(line);
-              scenarios.add(scenario);
-            }
+          CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT);
+      ) {
+        List<Button> buttons = new LinkedList<>();
+        for (CSVRecord record : parser) {
+          Button button = new Button();
+          button.setFromScenarioId(Long.parseLong(record.get(0)));
+          button.setTitle(record.get(1));
+          String rawScenarioId = record.get(2).trim();
+
+          if (!rawScenarioId.isEmpty()) {
+            button.setToScenarioId(Long.parseLong(rawScenarioId));
           }
-          return scenarios;
+          buttons.add(button);
+        }
+        database.getButtonsDao().insert(buttons);
       } catch (IOException e) {
-        throw new TaskException(e);
+        throw new RuntimeException(e);
       }
     }
   }

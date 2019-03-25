@@ -1,16 +1,13 @@
 package edu.cnm.deepdive.escaperoom.model.dao;
 
-import static org.junit.Assert.*;
-
 import edu.cnm.deepdive.escaperoom.model.EscapeRoomDB;
-import edu.cnm.deepdive.escaperoom.model.entity.Buttons;
 import org.junit.After;
 import org.junit.Before;
 
-public class ButtonsDaoTest {
+public class ButtonDaoTest {
 
   private EscapeRoomDB escapeRoomDB;
-  private ButtonsDao buttonsDao;
+  private ButtonDao mButtonDao;
   @Before
   public void setUp() throws Exception {
   }

@@ -12,20 +12,18 @@ import android.arch.persistence.room.PrimaryKey;
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "from_scenario_id"),
         @ForeignKey(
         entity = Scenario.class, parentColumns = "scenario_id", childColumns = "to_scenario_id")
-    }, indices = {
-        @Index("buttons_id"), @Index("from_scenario_id"), @Index("buttons_title"), @Index("to_scenario_id")}
+    }
 )
-public class Buttons {
+public class Button {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "buttons_id")
   private long buttonsId;
-  @ColumnInfo(name = "from_scenario_id")
+  @ColumnInfo(name = "from_scenario_id", index = true)
   private long fromScenarioId;
-  @ColumnInfo(name = "to_scenario_id")
-  private long toScenarioId;
-  @ColumnInfo(name = "buttons_title")
-  private String buttonsTitle;
+  @ColumnInfo(name = "to_scenario_id", index = true)
+  private Long toScenarioId;
+  private String title;
 
   public long getButtonsId() {
     return buttonsId;
@@ -43,19 +41,19 @@ public class Buttons {
     this.fromScenarioId = fromScenarioId;
   }
 
-  public long getToScenarioId() {
+  public Long getToScenarioId() {
     return toScenarioId;
   }
 
-  public void setToScenarioId(long toScenarioId) {
+  public void setToScenarioId(Long toScenarioId) {
     this.toScenarioId = toScenarioId;
   }
 
-  public String getButtonsTitle() {
-    return buttonsTitle;
+  public String getTitle() {
+    return title;
   }
 
-  public void setButtonsTitle(String buttonsTitle) {
-    this.buttonsTitle = buttonsTitle;
+  public void setTitle(String title) {
+    this.title = title;
   }
 }

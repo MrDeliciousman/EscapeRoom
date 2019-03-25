@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "faf12c15d13b80a4997d4adae2a097cf",
+    "identityHash": "0bc151dd04ae569dbbe49234bdba8380",
     "entities": [
       {
         "tableName": "ActionHistory",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_history` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_id` INTEGER NOT NULL, `scenario_id` INTEGER NOT NULL, `buttons_id` INTEGER NOT NULL, `buttons_title` TEXT, FOREIGN KEY(`user_id`) REFERENCES `User`(`user_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`buttons_id`) REFERENCES `Buttons`(`buttons_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`action_history` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `user_id` INTEGER NOT NULL, `scenario_id` INTEGER NOT NULL, `buttons_id` INTEGER NOT NULL, `buttons_title` TEXT, FOREIGN KEY(`user_id`) REFERENCES `User`(`user_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`buttons_id`) REFERENCES `Button`(`buttons_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "actionHistory",
@@ -111,7 +111,7 @@
             ]
           },
           {
-            "table": "Buttons",
+            "table": "Button",
             "onDelete": "NO ACTION",
             "onUpdate": "NO ACTION",
             "columns": [
@@ -124,8 +124,8 @@
         ]
       },
       {
-        "tableName": "Buttons",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`buttons_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `from_scenario_id` INTEGER NOT NULL, `to_scenario_id` INTEGER NOT NULL, `buttons_title` TEXT, FOREIGN KEY(`from_scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`to_scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "tableName": "Button",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`buttons_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `from_scenario_id` INTEGER NOT NULL, `to_scenario_id` INTEGER, `title` TEXT, FOREIGN KEY(`from_scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION , FOREIGN KEY(`to_scenario_id`) REFERENCES `Scenario`(`scenario_id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "buttonsId",
@@ -143,11 +143,11 @@
             "fieldPath": "toScenarioId",
             "columnName": "to_scenario_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
-            "fieldPath": "buttonsTitle",
-            "columnName": "buttons_title",
+            "fieldPath": "title",
+            "columnName": "title",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -160,36 +160,20 @@
         },
         "indices": [
           {
-            "name": "index_Buttons_buttons_id",
-            "unique": false,
-            "columnNames": [
-              "buttons_id"
-            ],
-            "createSql": "CREATE  INDEX `index_Buttons_buttons_id` ON `${TABLE_NAME}` (`buttons_id`)"
-          },
-          {
-            "name": "index_Buttons_from_scenario_id",
+            "name": "index_Button_from_scenario_id",
             "unique": false,
             "columnNames": [
               "from_scenario_id"
             ],
-            "createSql": "CREATE  INDEX `index_Buttons_from_scenario_id` ON `${TABLE_NAME}` (`from_scenario_id`)"
+            "createSql": "CREATE  INDEX `index_Button_from_scenario_id` ON `${TABLE_NAME}` (`from_scenario_id`)"
           },
           {
-            "name": "index_Buttons_buttons_title",
-            "unique": false,
-            "columnNames": [
-              "buttons_title"
-            ],
-            "createSql": "CREATE  INDEX `index_Buttons_buttons_title` ON `${TABLE_NAME}` (`buttons_title`)"
-          },
-          {
-            "name": "index_Buttons_to_scenario_id",
+            "name": "index_Button_to_scenario_id",
             "unique": false,
             "columnNames": [
               "to_scenario_id"
             ],
-            "createSql": "CREATE  INDEX `index_Buttons_to_scenario_id` ON `${TABLE_NAME}` (`to_scenario_id`)"
+            "createSql": "CREATE  INDEX `index_Button_to_scenario_id` ON `${TABLE_NAME}` (`to_scenario_id`)"
           }
         ],
         "foreignKeys": [
@@ -320,7 +304,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"faf12c15d13b80a4997d4adae2a097cf\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0bc151dd04ae569dbbe49234bdba8380\")"
     ]
   }
 }
