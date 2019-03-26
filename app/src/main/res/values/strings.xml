@@ -94,6 +94,7 @@
   <string name="option2_button">Option2</string>
   <string name="history_setting">History</string>
   <string name="ok_button">ok</string>
+  <string name="base_url">https://api.openweathermap.org/data/2.5/</string>
   <string-array name="dummy_history">
     <item>scenario1</item>
     <item>scenario2</item>

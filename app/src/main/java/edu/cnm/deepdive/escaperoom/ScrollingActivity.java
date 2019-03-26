@@ -15,8 +15,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import edu.cnm.deepdive.escaperoom.model.EscapeRoomDB;
 import edu.cnm.deepdive.escaperoom.model.entity.Scenario;
+import edu.cnm.deepdive.escaperoom.service.EscapeRoomWebService.GetWeatherTask;
 import java.util.LinkedList;
 import java.util.List;
+
+/**
+ *  ScrollingActivity
+ */
 
 public class ScrollingActivity extends AppCompatActivity implements OnClickListener {
 
@@ -78,7 +83,23 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
     if (toId != null) {
       loadScenario(toId);
     } else {
-      // Check the weather, etc.
+      new GetWeatherTask()
+          .setSuccessListener((weather) -> {
+            //Use the weather
+            float temperature = weather.getMain().getTemperature();
+            long dynamicScenario;
+              if (temperature < 284F) {
+                dynamicScenario = 8;
+              } else {
+                dynamicScenario = 12;
+              }
+
+            loadScenario(dynamicScenario);
+          })
+          .setFailureListener((ignore) -> {
+            //TODO handle a service call failure
+          })
+          .execute("albuquerque");
     }
   }
 

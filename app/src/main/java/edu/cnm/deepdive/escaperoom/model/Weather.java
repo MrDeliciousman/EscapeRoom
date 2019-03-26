@@ -1,15 +1,39 @@
 package edu.cnm.deepdive.escaperoom.model;
 
-import android.support.annotation.NonNull;
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-public class Weather implements Serializable {
+/**
+ * Encapsulates attributes of a single Main from OpenWeatherAPI.GSon is
+ * annotation is used to specify the information needed in the Scrolling Activity.
+ * 
+ */
 
-  private static final long SerialVersionUID = 2547946263420122184L;
+public class Weather {
 
-  @NonNull
-  private String temp;
+  @Expose
+  private Main main;
 
-  @NonNull
-  public String getTemp() { return temp;}
+  public Main getMain() {
+    return main;
+  }
+
+  public void setMain(Main main) {
+    this.main = main;
+  }
+
+  public static class Main {
+
+    @Expose
+    @SerializedName("temp")
+    private float temperature;
+
+    public float getTemperature() {
+      return temperature;
+    }
+
+    public void setTemperature(float temperature) {
+      this.temperature = temperature;
+    }
+  }
 }
