@@ -6,13 +6,17 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   app:layout_behavior="@string/appbar_scrolling_view_behavior"
+  android:layout_margin="0dp"
+  android:padding="0dp"
   tools:context=".ScrollingActivity"
   tools:showIn="@layout/activity_scrolling">
 
   <ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:src="@drawable/intro"/>
+    android:id="@+id/content_image"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:adjustViewBounds="true"
+    android:scaleType="fitStart"/>
 
 
 </android.support.v4.widget.NestedScrollView>

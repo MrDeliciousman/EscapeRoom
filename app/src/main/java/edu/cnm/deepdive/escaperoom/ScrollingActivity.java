@@ -1,7 +1,10 @@
 package edu.cnm.deepdive.escaperoom;
 
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,75 +20,31 @@ import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity implements OnClickListener {
 
-
-  Button option1;
-  Button option2;
+  CollapsingToolbarLayout toolbarLayout;
+  private Button option1;
+  private Button option2;
   private ImageView imageView;
-  private String resourceName;
-  private Long currentScenarioId = 1L;
-  private String scenarioTitle;
-  private Long toScenarioIdOption1;
-  private Long toScenarioIdOption2;
-  private String option1Title;
-  private String option2Title;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_scrolling);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
+    toolbarLayout = findViewById(R.id.toolbar_layout);
+    imageView = findViewById(R.id.content_image);
+    option1 = findViewById(R.id.option1);
+    option2 = findViewById(R.id.option2);
+    option1.setOnClickListener(this);
+    option2.setOnClickListener(this);
+    loadScenario(1);
   }
 
   private void loadScenario(long scenarioId) {
-    //TODO create and invoke an async task to read and populate the UI
-
-
-
-
-
-    Button button1 = findViewById(R.id.option1);
-
-    //long scenarioId = 1;
-    // Get scenario from DB.
-
-    long toScenarioFirst = 2;
-    long toScenarioSecond = 3;
-    button1.setTag(toScenarioFirst);
-    button1.setOnClickListener(this);
-  }
-
-  private class loadViewTask extends AsyncTask<Long, Void, Void> {
-
-    List<edu.cnm.deepdive.escaperoom.model.entity.Button> buttons = new LinkedList<>();
-    Scenario scenario;
-
-    @Override
-    protected  Void doInBackground(Long... scenarioId) {
-
-      buttons = EscapeRoomDB.getInstance().getButtonsDao().getButtons(scenarioId[0]);
-      scenario = EscapeRoomDB.getInstance().getScenarioDao().findAllByScenarioId(scenarioId[0]);
-      return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void void1) {
-      currentScenarioId = scenario.getScenarioID();
-      resourceName = scenario.getResourceName();
-      scenarioTitle = scenario.getTitle();
-      imageView
-          .setImageResource(ScrollingActivity
-          .this.getResources()
-          .getIdentifier(resourceName, "drawable", ScrollingActivity.this.getPackageName()));
-      toScenarioIdOption1 = buttons.get(0).getToScenarioId();
-      toScenarioIdOption2 = buttons.get(1).getToScenarioId();
-      option1Title = buttons.get(0).getTitle();
-      option2Title = buttons.get(1).getTitle();
-
-    }
+    new LoadViewTask().execute(scenarioId);
 
   }
+
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,10 +75,39 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
   @Override
   public void onClick(View v) {
     Long toId = (Long) v.getTag();
-    switch (v.getId()) {
-      case R.id.option1:
-        // Go to scenario for toId;
-        break;
+    if (toId != null) {
+      loadScenario(toId);
+    } else {
+      // Check the weather, etc.
     }
   }
+
+  private class LoadViewTask extends AsyncTask<Long, Void, Void> {
+
+    private List<edu.cnm.deepdive.escaperoom.model.entity.Button> buttons = new LinkedList<>();
+    private Scenario scenario;
+
+    @Override
+    protected Void doInBackground(Long... scenarioId) {
+
+      buttons = EscapeRoomDB.getInstance().getButtonsDao().getButtons(scenarioId[0]);
+      scenario = EscapeRoomDB.getInstance().getScenarioDao().findAllByScenarioId(scenarioId[0]);
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void void1) {
+      String resourceName = scenario.getResourceName().trim();
+      toolbarLayout.setTitle(scenario.getTitle().trim());
+      int imageId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
+      Drawable image = getDrawable(imageId);
+      imageView.setImageDrawable(image);
+      option1.setText(buttons.get(0).getTitle());
+      option2.setText(buttons.get(1).getTitle());
+      option1.setTag(buttons.get(0).getToScenarioId());
+      option2.setTag(buttons.get(1).getToScenarioId());
+    }
+
+  }
+
 }
