@@ -20,8 +20,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *  ScrollingActivity
+ * Primary controller class of the NASA APOD client app. This activity configures and then responds
+ * to clicks in a {@link android.support.design.widget.AppBarLayout} to hide and show one{@link
+ * HistoryFragment} instance. It also responds to clicks on two buttons {@link
+ * Button} (the button press loads the next image view, button titles and Title dispaly).
  */
+
 
 public class ScrollingActivity extends AppCompatActivity implements OnClickListener {
 
@@ -77,6 +81,14 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
     return super.onOptionsItemSelected(item);
   }
 
+  /**
+   * This method holds the {@link Scenario} id using a tag. Depending on the button
+   * being pressed the button passes the id off to load the next {@link Scenario}. At
+   * certain junction points in the story, a call is made to the {@link edu.cnm.deepdive.escaperoom.model.Weather}
+   * APi. Depending on the temperature returned, a different {@link Scenario} is presented.
+   *
+   * @param v {@link View}.
+   */
   @Override
   public void onClick(View v) {
     Long toId = (Long) v.getTag();
@@ -85,10 +97,9 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
     } else {
       new GetWeatherTask()
           .setSuccessListener((weather) -> {
-            //Use the weather
             float temperature = weather.getMain().getTemperature();
             long dynamicScenario;
-              if (temperature < 284F) {
+              if (temperature < 284) {
                 dynamicScenario = 8;
               } else {
                 dynamicScenario = 12;
@@ -103,6 +114,12 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
     }
   }
 
+  /**
+   * This class calls to the local database to get the information for buttons
+   * and image view. It does this in the background and uses an async task to load
+   * everything at the same time.
+   *
+   */
   private class LoadViewTask extends AsyncTask<Long, Void, Void> {
 
     private List<edu.cnm.deepdive.escaperoom.model.entity.Button> buttons = new LinkedList<>();

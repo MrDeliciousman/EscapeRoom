@@ -21,7 +21,11 @@ import android.widget.TextView;
 import edu.cnm.deepdive.escaperoom.model.entity.ActionHistory;
 import java.util.ArrayList;
 
-
+/**
+ * Hosts a {@link ListView} of {@link ActionHistory} instances from the local database, allowing user
+ * to list a view of the {@link ActionHistory}. Currently, the list shows dummy items. I did not have enough time to
+ * implement the insert of scenarios into the {@link ActionHistory} table.
+ */
 public class HistoryFragment extends DialogFragment {
 
   private ListView historyList;
