@@ -50,7 +50,7 @@ The app is fully operation for pre-release use:
 # Design & technical documentation
 
 # Copyrights and Licenses
-Copyright 2019 Lance Zotigh & Deep Dive Coding
+Copyright 2019 Thomas Herrera & Deep Dive Coding
 Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
  + [Link to the Apache License](http://www.apache.org/licenses/LICENSE-2.0)
