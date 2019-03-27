@@ -6,6 +6,11 @@ import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+/**
+ * This Table is not currently being used. It was intended to store the users actions
+ * and scenarios that they have done in the past. I did not have enough time to implement them this
+ * sprint.
+ */
 @Entity(
     foreignKeys = {@ForeignKey
         (entity = User.class, parentColumns = "user_id", childColumns = "user_id"),

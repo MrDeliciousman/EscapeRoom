@@ -57,6 +57,12 @@ public abstract class EscapeRoomDB extends RoomDatabase {
         .addCallback(new Callback())
         .build();
   }
+
+  /**
+   * This class builds the database by using the @onOpen method to
+   * find a list of scenarios that returns void so that the @preLoadTask can
+   * populate the database.
+   */
   private static class Callback extends RoomDatabase.Callback {
 
     @Override
@@ -81,6 +87,12 @@ public abstract class EscapeRoomDB extends RoomDatabase {
     }
   }
 
+  /**
+   *On Run this class will preload the database with the Scenario Table
+   * and Buttons Table. It invokes the CSV Parser to read the csv file @res/raw
+   * and then populates the tables with those values.
+   */
+
   private static class PreloadTask
   extends Thread {
 
@@ -93,6 +105,12 @@ public abstract class EscapeRoomDB extends RoomDatabase {
       loadButtons(context, database);
     }
 
+    /**
+     * This method preloads the Scenario Table on Run.
+     * 
+     * @param context
+     * @param database
+     */
     private void loadScenarios(Context context, EscapeRoomDB database) {
        try (
           InputStream input = context.getResources().openRawResource(R.raw.scenario);
@@ -113,6 +131,12 @@ public abstract class EscapeRoomDB extends RoomDatabase {
       }
     }
 
+    /**
+     * This method preloads the Buttons Table on Run.
+     *
+     * @param context
+     * @param database
+     */
     private void loadButtons(Context context, EscapeRoomDB database) {
       try (
           InputStream input = context.getResources().openRawResource(R.raw.buttons);
