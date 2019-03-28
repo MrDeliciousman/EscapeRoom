@@ -49,6 +49,9 @@ The app is fully operation for pre-release use:
  
 # Design & technical documentation
  + [Wireframes](Wireframe.html)
+ + [ERD](ERD.html)
+ + [DDL](docs/ddl.md)
+ + [Javadoc](docs/api/)
 # Copyrights and Licenses
 Copyright 2019 Thomas Herrera & Deep Dive Coding
 Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
