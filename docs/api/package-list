@@ -2,3 +2,4 @@ edu.cnm.deepdive.escaperoom
 edu.cnm.deepdive.escaperoom.model
 edu.cnm.deepdive.escaperoom.model.dao
 edu.cnm.deepdive.escaperoom.model.entity
+edu.cnm.deepdive.escaperoom.service
