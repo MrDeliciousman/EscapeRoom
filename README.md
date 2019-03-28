@@ -84,5 +84,10 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 2. I am a user that likes to explore different paths in a game and see what the different ending are. I would enjoy the option to go back to previous junctions and choose other decisions so that I may see what the different paths lead to.
 
+# Instructions
+ * [Using the app](UserInstructions.html)
+ 
+ 
+ 
 For more details on current classes and methods, see [Javadoc](docs/api/) .
 [DDL](docs/ddl.md)
