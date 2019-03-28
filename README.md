@@ -86,6 +86,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 # Instructions
  * [Using the app](UserInstructions.html)
+ * [Building the app](BuildInstructions.html)
  
  
  
