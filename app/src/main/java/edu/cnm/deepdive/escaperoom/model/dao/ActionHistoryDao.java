@@ -16,15 +16,6 @@ import edu.cnm.deepdive.escaperoom.model.entity.User;
 public interface ActionHistoryDao {
 
   /**
-   * Selects and returns the single {@link ActionHistory} instance
-   * from the local database
-   *
-   * @return {@link ActionHistory} instance.
-   */
-  @Query("SELECT * FROM ActionHistory")
-  ActionHistory getActionHistory(User user);
-
-  /**
    * Inserts one {@link ActionHistory} instance int the local database.
    *
    * @param actionHistory {@link ActionHistory} scenario.

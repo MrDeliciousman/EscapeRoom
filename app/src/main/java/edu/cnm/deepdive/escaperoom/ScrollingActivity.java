@@ -99,7 +99,7 @@ public class ScrollingActivity extends AppCompatActivity implements OnClickListe
           .setSuccessListener((weather) -> {
             float temperature = weather.getMain().getTemperature();
             long dynamicScenario;
-              if (temperature < 284) {
+              if (temperature > 295) {
                 dynamicScenario = 8;
               } else {
                 dynamicScenario = 12;
