@@ -17,7 +17,7 @@
   
 ### Current State
 
-The app is fully operation for pre-release use:
+The app is fully operation for testing/pre-release use:
 
   * Images, buttons, and titles load when in correct order when a button is pressed.
   * The call to the OpenWeatherMap API works as intended.
@@ -26,8 +26,10 @@ The app is fully operation for pre-release use:
 # Testing  
 
 ### Operations
+ * Inserting and retrieving a scenario from the Scenario Table in the local database.
+ * Going to a dialogue fragment from the collapsing menu from the scrolling activity.
 
-### Environments
+# Environments
 
 ### Physical Device
   * Galaxy S10, Android 9(API28)
@@ -46,6 +48,19 @@ The app is fully operation for pre-release use:
 
 ## External Sources
  + [Open Weather Map API](https://openweathermap.org/api)
+ 
+ # Potential Improvements
+ 
+### Functional Goals
+ * Implement google sign in.
+ * Implement the User table and ActionHistory table in the local database so that users can store their progress.
+ * Implement the dialogue fragment to display user history from the local database.
+ * Add more Scenarios to the database for a more robust experience.
+### Cosmetic Improvements
+ * Fix white bar in Scrolling View.
+ * Add custom background for the Title background.
+ * Create more Refined Art scenarios for the stories.
+ 
  
 # Design & technical documentation
  + [Wireframes](Wireframe.html)
